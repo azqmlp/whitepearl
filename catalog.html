@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Clothing Store</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Limelight&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Notable&display=swap" rel="stylesheet">
+
+    <style>
+        /* Основные стили страницы */
+        body {
+            color: #2c3e50;
+            background-color: #f8f9fa;
+            padding-top: 80px; /* Отступ для фиксированной шапки */
+            transition: padding-top 0.3s;
+            font-family: "Montserrat", serif;
+            transition: background-color 0.5s, color 0.5s;
+        }
+        .day-theme {
+            background-color: white;
+            color: black;
+        }
+        .night-theme {
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        .toggle {
+            background-color: #353635; /* светлый фон */
+            display: flex;
+            margin:0 auto;
+            color: #333; /* темный текст */
+            border: none; /* без рамки */
+            border-radius: 50%; /* круглая форма */
+            width: 40px; /* ширина */
+            height: 40px; /* высота */
+            font-family: 'Arial', sans-serif; /* стильный шрифт */
+            cursor: pointer; /* указатель при наведении */
+            transition: background-color 0.3s, transform 0.3s; /* анимация */
+            display: flex; /* для центрирования текста */
+            align-items: center; /* вертикальное центрирование */
+            justify-content: center; /* горизонтальное центрирование */
+        }
+
+        .toggle:hover {
+            background-color: #e0e0e0; /* темнее при наведении */
+            transform: scale(1.1); /* увеличение при наведении */
+        }
+
+        h1 {
+            color: #e74c3c;
+            font-family: "Limelight", serif;
+        }
+        
+        /* Шапка с навигацией */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #ffffff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+        header .navbar-brand {
+            font-size: 1.5rem;
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        /* Каталог товаров */
+        .catalog-section {
+            text-align: center;
+            padding: 40px 0;
+            font-family: "Montserrat", serif;
+        }
+        .catalog {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .product {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: calc(25% - 20px);
+            max-width: 250px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            padding: 15px;
+        }
+        .product:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        .product img {
+            width: 100%;
+            border-radius: 8px;
+        }
+        .product-info {
+            text-align: center;
+            padding: 10px 0;
+        }
+        .product-info h3 {
+            font-size: 1.2rem;
+            color: #34495e;
+        }
+        .price {
+            color: #e74c3c;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+        
+        /* Секция фильтрации */
+        .filter-section {
+            padding: 20px 0;
+            text-align: center;
+        }
+        .filter-section label {
+            font-weight: bold;
+            color: #34495e;
+        }
+        #filterButton, #factButton {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        #filterButton:hover, #factButton:hover {
+            background-color: #c0392b;
+            transform: translateY(-3px);
+        }
+        footer {
+            background-color: #3f3f3f;
+            color: #ffffff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        /* Адаптация под мобильные устройства */
+        @media (max-width: 992px) {
+            .product {
+                width: calc(50% - 20px);
+            }
+        }
+        @media (max-width: 576px) {
+            .product {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" href="#">WhitePearl</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="catalog.html">Catalog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="buy.html">Buy</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Основной заголовок страницы -->
+    <section class="catalog-section">
+        <h1>Clothing Catalog</h1>
+        <p>Discover our exclusive collection of clothing and accessories.</p>
+        <p>SWITCH THEME</p>
+        <button class="toggle" onclick="toggleTheme()"></button>
+    </section>
+
+    <!-- Фильтрация товаров -->
+    <section class="filter-section">
+        <label for="category">Filter by category:</label>
+        <select id="category">
+            <option value="all">All</option>
+            <option value="shirts">Shirts</option>
+            <option value="pants">Pants</option>
+            <option value="accessories">Accessories</option>
+        </select>
+        <button id="filterButton">Filter</button>
+    </section>
+
+    <!-- Каталог -->
+    <div class="catalog" id="catalog"></div>
+
+    <!-- Случайный факт -->
+    <section class="fact-section text-center">
+        <button id="factButton" onclick="playSound()">Get a Fun Fact</button>
+        <div id="factArea" class="hidden mt-3"></div>
+    </section>
+
+    <audio id="click-sound" src="magic.mp3" preload="auto"></audio>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Contact Information: <br>
+                Phone: +7 (123) 456-78-90 <br>
+                Email: whitepearl@mail.ru <br>
+                Designed by Yeskhat Akmarzhan
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const products = [
+            { id: 1, name: "T-Shirt", category: "shirts", price: "$19.99", image: "images/shirt.jpg" },
+            { id: 2, name: "Jeans", category: "pants", price: "$39.99", image: "images/jeans.jpg" },
+            { id: 3, name: "Cap", category: "accessories", price: "$15.99", image: "images/cap.jpg" },
+            { id: 4, name: "Dress Shirt", category: "shirts", price: "$29.99", image: "images/dress.jpg" },
+            { id: 5, name: "Shorts", category: "pants", price: "$24.99", image: "images/shorts.jpg" },
+            { id: 6, name: "Sunglasses", category: "accessories", price: "$49.99", image: "images/sun.jpg" }
+        ];
+
+        function renderProducts(filter = "all") {
+            const catalog = document.getElementById('catalog');
+            catalog.innerHTML = '';
+            const filteredProducts = products.filter(product => filter === "all" || product.category === filter);
+            filteredProducts.forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.className = 'product animate__animated animate__fadeInUp';
+                productDiv.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}">
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p class="price">${product.price}</p>
+                    </div>
+                `;
+                catalog.appendChild(productDiv);
+            });
+        }
+
+        document.getElementById('filterButton').addEventListener('click', () => {
+            const selectedCategory = document.getElementById('category').value;
+            renderProducts(selectedCategory);
+        });
+
+        document.getElementById('factButton').addEventListener('click', () => {
+            const facts = [
+                "Did you know? The world's largest sweater is 45.4 meters long.",
+                "Here's a fact: The average person owns 7 pairs of jeans.",
+                "Fun fact: The first blue jeans were made in 1873.",
+                "Did you know? Cotton is the most widely used natural fiber in clothing."
+            ];
+            const randomFact = facts[Math.floor(Math.random() * facts.length)];
+            const factArea = document.getElementById('factArea');
+            factArea.innerText = randomFact;
+            factArea.classList.remove('hidden');
+            factArea.classList.add('animate__animated', 'animate__fadeIn');
+        });
+
+        renderProducts();
+
+        // Function to toggle theme
+        function toggleTheme() {
+            const body = document.body;
+            body.classList.toggle('night-theme');
+            body.classList.toggle('day-theme');
+            // Save theme preference in localStorage
+            if (body.classList.contains('night-theme')) {
+                localStorage.setItem('theme', 'night');
+            } else {
+                localStorage.setItem('theme', 'day');
+            }
+        }
+
+        // Check localStorage for theme preference on load
+        window.onload = function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'night') {
+                document.body.classList.add('night-theme');
+                document.body.classList.remove('day-theme');
+            }
+        };
+
+        function playSound() {
+        var sound = document.getElementById("click-sound");
+        sound.currentTime = 0; // Перематываем звук в начало
+        sound.play();
+    }
+    </script>
+</body>
+</html>
